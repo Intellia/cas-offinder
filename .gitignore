@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # cmake and make generated files
 CMakeCache.txt
 CMakeFiles/
@@ -6,3 +7,9 @@ cas-offinder
 cmake_install.cmake
 config.h
 oclkernels.h
+=======
+.idea
+.vscode
+cmake-build-debug
+build
+>>>>>>> 6912dd1... allow prediction to have names

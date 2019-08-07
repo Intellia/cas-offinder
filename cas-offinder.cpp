@@ -363,7 +363,7 @@ void Cas_OFFinder::compareAll(const char* outfilename) {
 							if (m_directions[dev_index][i] == '-') set_complementary_sequence((cl_char *)strbuf, m_patternlen);
 							indicate_mismatches((cl_char*)strbuf, (cl_char*)m_compares[compcnt].c_str());
 							for (j = 0; ((j < chrpos.size()) && (loci >= chrpos[j])); j++) idx = j;
-							(*fo) << m_compares[compcnt] << "\t" << chrnames[idx] << "\t" << loci - chrpos[idx] << "\t" << strbuf << "\t" << m_directions[dev_index][i] << "\t" << m_mmcounts[dev_index][i] << endl;
+							(*fo) << m_compares[compcnt] << "\t" << chrnames[idx] << "\t" << loci - chrpos[idx] << "\t" << strbuf << "\t" << m_directions[dev_index][i] << "\t" << m_mmcounts[dev_index][i] << "\t" << m_seqnames[dev_index] << endl;
 						}
 					}
 				}
@@ -397,10 +397,10 @@ void Cas_OFFinder::print_usage() {
 		"Example input file:" << endl <<
 		"/var/chromosomes/human_hg19" << endl <<
 		"NNNNNNNNNNNNNNNNNNNNNRG" << endl <<
-		"GGCCGACCTGTCGCTGACGCNNN 5" << endl <<
-		"CGCCAGCGTCAGCGACAGGTNNN 5" << endl <<
-		"ACGGCGCCAGCGTCAGCGACNNN 5" << endl <<
-		"GTCGCTGACGCTGGCGCCGTNNN 5" << endl <<
+		"GGCCGACCTGTCGCTGACGCNNN 5 Guide1" << endl <<
+		"CGCCAGCGTCAGCGACAGGTNNN 5 Guide2" << endl <<
+		"ACGGCGCCAGCGTCAGCGACNNN 5 Guide3" << endl <<
+		"GTCGCTGACGCTGGCGCCGTNNN 5 Guide4" << endl <<
 		endl <<
 		"Available device list:" << endl;
 
@@ -457,6 +457,7 @@ void Cas_OFFinder::parseInput(istream& input) {
 		transform(sline[0].begin(), sline[0].end(), sline[0].begin(), ::toupper);
 		m_compares.push_back(sline[0]);
 		m_thresholds.push_back(atoi(sline[1].c_str()));
+        m_seqnames.push_back(sline[2]); /* bowhan: record the name of the sequence */
 	}
 }
 
