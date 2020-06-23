@@ -27,36 +27,40 @@ __kernel void finder(__global char* chr,
 		k = l_pat_index[j];
 		if (k == -1)
 			break;
-		if ( (l_pat[k] == 'R' && (chr[i+k] == 'C' || chr[i+k] == 'T')) ||
-		     (l_pat[k] == 'Y' && (chr[i+k] == 'A' || chr[i+k] == 'G')) ||
-		     (l_pat[k] == 'K' && (chr[i+k] == 'A' || chr[i+k] == 'C')) ||
-		     (l_pat[k] == 'M' && (chr[i+k] == 'G' || chr[i+k] == 'T')) ||
-		     (l_pat[k] == 'W' && (chr[i+k] == 'C' || chr[i+k] == 'G')) ||
-		     (l_pat[k] == 'S' && (chr[i+k] == 'A' || chr[i+k] == 'T')) ||
-		     (l_pat[k] == 'H' && (chr[i+k] == 'G')) ||
-		     (l_pat[k] == 'B' && (chr[i+k] == 'A')) ||
-		     (l_pat[k] == 'V' && (chr[i+k] == 'T')) ||
-		     (l_pat[k] == 'D' && (chr[i+k] == 'C')) ||
-		     (l_pat[k] == 'A' && (chr[i+k] != 'A')) ||
-		     (l_pat[k] == 'G' && (chr[i+k] != 'G')) ||
-		     (l_pat[k] == 'C' && (chr[i+k] != 'C')) ||
-		     (l_pat[k] == 'T' && (chr[i+k] != 'T')) )
+		if (
+                (l_pat[k] == 'R' && chr[i+k] != 'A' && chr[i+k] != 'G' && chr[i+k] != 'R' && chr[i+k] != 'D' && chr[i+k] != 'V' && chr[i+k] != 'N') ||
+                (l_pat[k] == 'Y' && chr[i+k] != 'C' && chr[i+k] != 'T' && chr[i+k] != 'Y' && chr[i+k] != 'B' && chr[i+k] != 'H' && chr[i+k] != 'N') ||
+                (l_pat[k] == 'K' && chr[i+k] != 'G' && chr[i+k] != 'T' && chr[i+k] != 'K' && chr[i+k] != 'B' && chr[i+k] != 'D' && chr[i+k] != 'N') ||
+                (l_pat[k] == 'M' && chr[i+k] != 'A' && chr[i+k] != 'C' && chr[i+k] != 'M' && chr[i+k] != 'H' && chr[i+k] != 'V' && chr[i+k] != 'N') ||
+                (l_pat[k] == 'W' && chr[i+k] != 'A' && chr[i+k] != 'T' && chr[i+k] != 'W' && chr[i+k] != 'D' && chr[i+k] != 'H' && chr[i+k] != 'N') ||
+                (l_pat[k] == 'S' && chr[i+k] != 'C' && chr[i+k] != 'G' && chr[i+k] != 'S' && chr[i+k] != 'B' && chr[i+k] != 'V' && chr[i+k] != 'N') ||
+                (l_pat[k] == 'H' && chr[i+k] == 'G') ||
+                (l_pat[k] == 'B' && chr[i+k] == 'A') ||
+                (l_pat[k] == 'V' && chr[i+k] == 'T') ||
+                (l_pat[k] == 'D' && chr[i+k] == 'C') ||
+                (l_pat[k] == 'A' && chr[i+k] != 'A' && chr[i+k] != 'R' && chr[i+k] != 'W' && chr[i+k] != 'M' && chr[i+k] != 'D' && chr[i+k] != 'H' && chr[i+k] != 'V' && chr[i+k] != 'N') ||
+                (l_pat[k] == 'G' && chr[i+k] != 'G' && chr[i+k] != 'A' && chr[i+k] != 'S' && chr[i+k] != 'K' && chr[i+k] != 'B' && chr[i+k] != 'D' && chr[i+k] != 'V' && chr[i+k] != 'N') ||
+                (l_pat[k] == 'C' && chr[i+k] != 'C' && chr[i+k] != 'Y' && chr[i+k] != 'S' && chr[i+k] != 'M' && chr[i+k] != 'B' && chr[i+k] != 'H' && chr[i+k] != 'V' && chr[i+k] != 'N') ||
+                (l_pat[k] == 'T' && chr[i+k] != 'T' && chr[i+k] != 'Y' && chr[i+k] != 'W' && chr[i+k] != 'K' && chr[i+k] != 'B' && chr[i+k] != 'D' && chr[i+k] != 'H' && chr[i+k] != 'N')
+            )
 			localflag |= 2;
 		k = l_pat_index[patternlen + j];
-		if ( (l_pat[k + patternlen] == 'R' && (chr[i+k] == 'C' || chr[i+k] == 'T')) ||
-		     (l_pat[k + patternlen] == 'Y' && (chr[i+k] == 'A' || chr[i+k] == 'G')) ||
-		     (l_pat[k + patternlen] == 'K' && (chr[i+k] == 'A' || chr[i+k] == 'C')) ||
-		     (l_pat[k + patternlen] == 'M' && (chr[i+k] == 'G' || chr[i+k] == 'T')) ||
-		     (l_pat[k + patternlen] == 'W' && (chr[i+k] == 'C' || chr[i+k] == 'G')) ||
-		     (l_pat[k + patternlen] == 'S' && (chr[i+k] == 'A' || chr[i+k] == 'T')) ||
-		     (l_pat[k + patternlen] == 'H' && (chr[i+k] == 'G')) ||
-		     (l_pat[k + patternlen] == 'B' && (chr[i+k] == 'A')) ||
-		     (l_pat[k + patternlen] == 'V' && (chr[i+k] == 'T')) ||
-		     (l_pat[k + patternlen] == 'D' && (chr[i+k] == 'C')) ||
-		     (l_pat[k + patternlen] == 'A' && (chr[i+k] != 'A')) ||
-		     (l_pat[k + patternlen] == 'G' && (chr[i+k] != 'G')) ||
-		     (l_pat[k + patternlen] == 'C' && (chr[i+k] != 'C')) ||
-		     (l_pat[k + patternlen] == 'T' && (chr[i+k] != 'T')) )
+		if (
+                (l_pat[k+patternlen] == 'R' && chr[i+k] != 'A' && chr[i+k] != 'G' && chr[i+k] != 'R' && chr[i+k] != 'D' && chr[i+k] != 'V' && chr[i+k] != 'N') ||
+                (l_pat[k+patternlen] == 'Y' && chr[i+k] != 'C' && chr[i+k] != 'T' && chr[i+k] != 'Y' && chr[i+k] != 'B' && chr[i+k] != 'H' && chr[i+k] != 'N') ||
+                (l_pat[k+patternlen] == 'K' && chr[i+k] != 'G' && chr[i+k] != 'T' && chr[i+k] != 'K' && chr[i+k] != 'B' && chr[i+k] != 'D' && chr[i+k] != 'N') ||
+                (l_pat[k+patternlen] == 'M' && chr[i+k] != 'A' && chr[i+k] != 'C' && chr[i+k] != 'M' && chr[i+k] != 'H' && chr[i+k] != 'V' && chr[i+k] != 'N') ||
+                (l_pat[k+patternlen] == 'W' && chr[i+k] != 'A' && chr[i+k] != 'T' && chr[i+k] != 'W' && chr[i+k] != 'D' && chr[i+k] != 'H' && chr[i+k] != 'N') ||
+                (l_pat[k+patternlen] == 'S' && chr[i+k] != 'C' && chr[i+k] != 'G' && chr[i+k] != 'S' && chr[i+k] != 'B' && chr[i+k] != 'V' && chr[i+k] != 'N') ||
+                (l_pat[k+patternlen] == 'H' && chr[i+k] == 'G') ||
+                (l_pat[k+patternlen] == 'B' && chr[i+k] == 'A') ||
+                (l_pat[k+patternlen] == 'V' && chr[i+k] == 'T') ||
+                (l_pat[k+patternlen] == 'D' && chr[i+k] == 'C') ||
+                (l_pat[k+patternlen] == 'A' && chr[i+k] != 'A' && chr[i+k] != 'R' && chr[i+k] != 'W' && chr[i+k] != 'M' && chr[i+k] != 'D' && chr[i+k] != 'H' && chr[i+k] != 'V' && chr[i+k] != 'N') ||
+                (l_pat[k+patternlen] == 'G' && chr[i+k] != 'G' && chr[i+k] != 'A' && chr[i+k] != 'S' && chr[i+k] != 'K' && chr[i+k] != 'B' && chr[i+k] != 'D' && chr[i+k] != 'V' && chr[i+k] != 'N') ||
+                (l_pat[k+patternlen] == 'C' && chr[i+k] != 'C' && chr[i+k] != 'Y' && chr[i+k] != 'S' && chr[i+k] != 'M' && chr[i+k] != 'B' && chr[i+k] != 'H' && chr[i+k] != 'V' && chr[i+k] != 'N') ||
+                (l_pat[k+patternlen] == 'T' && chr[i+k] != 'T' && chr[i+k] != 'Y' && chr[i+k] != 'W' && chr[i+k] != 'K' && chr[i+k] != 'B' && chr[i+k] != 'D' && chr[i+k] != 'H' && chr[i+k] != 'N')
+		    )
 			localflag |= 1;
 		if (localflag == 3)
 			break;
@@ -92,20 +96,22 @@ __kernel void comparer(__global char* chr, __global unsigned int* loci, __global
 		for (j=0; j<patternlen; j++) {
 			k = l_comp_index[j];
 			if (k == -1) break;
-			if ( (l_comp[k] == 'R' && (chr[loci[i]+k] == 'C' || chr[loci[i]+k] == 'T')) ||
-			     (l_comp[k] == 'Y' && (chr[loci[i]+k] == 'A' || chr[loci[i]+k] == 'G')) ||
-			     (l_comp[k] == 'K' && (chr[loci[i]+k] == 'A' || chr[loci[i]+k] == 'C')) ||
-			     (l_comp[k] == 'M' && (chr[loci[i]+k] == 'G' || chr[loci[i]+k] == 'T')) ||
-			     (l_comp[k] == 'W' && (chr[loci[i]+k] == 'C' || chr[loci[i]+k] == 'G')) ||
-			     (l_comp[k] == 'S' && (chr[loci[i]+k] == 'A' || chr[loci[i]+k] == 'T')) ||
-			     (l_comp[k] == 'H' && (chr[loci[i]+k] == 'G')) ||
-			     (l_comp[k] == 'B' && (chr[loci[i]+k] == 'A')) ||
-			     (l_comp[k] == 'V' && (chr[loci[i]+k] == 'T')) ||
-			     (l_comp[k] == 'D' && (chr[loci[i]+k] == 'C')) ||
-				 (l_comp[k] == 'A' && (chr[loci[i]+k] != 'A')) ||
-			     (l_comp[k] == 'G' && (chr[loci[i]+k] != 'G')) ||
-			     (l_comp[k] == 'C' && (chr[loci[i]+k] != 'C')) ||
-			     (l_comp[k] == 'T' && (chr[loci[i]+k] != 'T'))) {
+			if (
+                (l_comp[k]  == 'R' && chr[loci[i]+k] != 'A' && chr[loci[i]+k] != 'G' && chr[loci[i]+k] != 'R' && chr[loci[i]+k] != 'D' && chr[loci[i]+k] != 'V' && chr[loci[i]+k] != 'N') ||
+                (l_comp[k]  == 'Y' && chr[loci[i]+k] != 'C' && chr[loci[i]+k] != 'T' && chr[loci[i]+k] != 'Y' && chr[loci[i]+k] != 'B' && chr[loci[i]+k] != 'H' && chr[loci[i]+k] != 'N') ||
+                (l_comp[k]  == 'K' && chr[loci[i]+k] != 'G' && chr[loci[i]+k] != 'T' && chr[loci[i]+k] != 'K' && chr[loci[i]+k] != 'B' && chr[loci[i]+k] != 'D' && chr[loci[i]+k] != 'N') ||
+                (l_comp[k]  == 'M' && chr[loci[i]+k] != 'A' && chr[loci[i]+k] != 'C' && chr[loci[i]+k] != 'M' && chr[loci[i]+k] != 'H' && chr[loci[i]+k] != 'V' && chr[loci[i]+k] != 'N') ||
+                (l_comp[k]  == 'W' && chr[loci[i]+k] != 'A' && chr[loci[i]+k] != 'T' && chr[loci[i]+k] != 'W' && chr[loci[i]+k] != 'D' && chr[loci[i]+k] != 'H' && chr[loci[i]+k] != 'N') ||
+                (l_comp[k]  == 'S' && chr[loci[i]+k] != 'C' && chr[loci[i]+k] != 'G' && chr[loci[i]+k] != 'S' && chr[loci[i]+k] != 'B' && chr[loci[i]+k] != 'V' && chr[loci[i]+k] != 'N') ||
+                (l_comp[k]  == 'H' && chr[loci[i]+k] == 'G') ||
+                (l_comp[k]  == 'B' && chr[loci[i]+k] == 'A') ||
+                (l_comp[k]  == 'V' && chr[loci[i]+k] == 'T') ||
+                (l_comp[k]  == 'D' && chr[loci[i]+k] == 'C') ||
+                (l_comp[k]  == 'A' && chr[loci[i]+k] != 'A' && chr[loci[i]+k] != 'R' && chr[loci[i]+k] != 'W' && chr[loci[i]+k] != 'M' && chr[loci[i]+k] != 'D' && chr[loci[i]+k] != 'H' && chr[loci[i]+k] != 'V' && chr[loci[i]+k] != 'N') ||
+                (l_comp[k]  == 'G' && chr[loci[i]+k] != 'G' && chr[loci[i]+k] != 'A' && chr[loci[i]+k] != 'S' && chr[loci[i]+k] != 'K' && chr[loci[i]+k] != 'B' && chr[loci[i]+k] != 'D' && chr[loci[i]+k] != 'V' && chr[loci[i]+k] != 'N') ||
+                (l_comp[k]  == 'C' && chr[loci[i]+k] != 'C' && chr[loci[i]+k] != 'Y' && chr[loci[i]+k] != 'S' && chr[loci[i]+k] != 'M' && chr[loci[i]+k] != 'B' && chr[loci[i]+k] != 'H' && chr[loci[i]+k] != 'V' && chr[loci[i]+k] != 'N') ||
+                (l_comp[k]  == 'T' && chr[loci[i]+k] != 'T' && chr[loci[i]+k] != 'Y' && chr[loci[i]+k] != 'W' && chr[loci[i]+k] != 'K' && chr[loci[i]+k] != 'B' && chr[loci[i]+k] != 'D' && chr[loci[i]+k] != 'H' && chr[loci[i]+k] != 'N')
+                ) {
 				lmm_count++;
 				if (lmm_count > threshold) break;
 			}
@@ -122,20 +128,22 @@ __kernel void comparer(__global char* chr, __global unsigned int* loci, __global
 		for (j=0; j<patternlen; j++) {
 			k = l_comp_index[patternlen + j];
 			if (k == -1) break;
-			if ( (l_comp[k+patternlen] == 'R' && (chr[loci[i]+k] == 'C' || chr[loci[i]+k] == 'T')) ||
-			     (l_comp[k+patternlen] == 'Y' && (chr[loci[i]+k] == 'A' || chr[loci[i]+k] == 'G')) ||
-			     (l_comp[k+patternlen] == 'K' && (chr[loci[i]+k] == 'A' || chr[loci[i]+k] == 'C')) ||
-			     (l_comp[k+patternlen] == 'M' && (chr[loci[i]+k] == 'G' || chr[loci[i]+k] == 'T')) ||
-			     (l_comp[k+patternlen] == 'W' && (chr[loci[i]+k] == 'C' || chr[loci[i]+k] == 'G')) ||
-			     (l_comp[k+patternlen] == 'S' && (chr[loci[i]+k] == 'A' || chr[loci[i]+k] == 'T')) ||
-			     (l_comp[k+patternlen] == 'H' && (chr[loci[i]+k] == 'G')) ||
-			     (l_comp[k+patternlen] == 'B' && (chr[loci[i]+k] == 'A')) ||
-			     (l_comp[k+patternlen] == 'V' && (chr[loci[i]+k] == 'T')) ||
-			     (l_comp[k+patternlen] == 'D' && (chr[loci[i]+k] == 'C')) ||
-			     (l_comp[k+patternlen] == 'A' && (chr[loci[i]+k] != 'A')) ||
-			     (l_comp[k+patternlen] == 'G' && (chr[loci[i]+k] != 'G')) ||
-			     (l_comp[k+patternlen] == 'C' && (chr[loci[i]+k] != 'C')) ||
-				 (l_comp[k+patternlen] == 'T' && (chr[loci[i]+k] != 'T'))) {
+			if (
+                (l_comp[k+patternlen]  == 'R' && chr[loci[i]+k] != 'A' && chr[loci[i]+k] != 'G' && chr[loci[i]+k] != 'R' && chr[loci[i]+k] != 'D' && chr[loci[i]+k] != 'V' && chr[loci[i]+k] != 'N') ||
+                (l_comp[k+patternlen]  == 'Y' && chr[loci[i]+k] != 'C' && chr[loci[i]+k] != 'T' && chr[loci[i]+k] != 'Y' && chr[loci[i]+k] != 'B' && chr[loci[i]+k] != 'H' && chr[loci[i]+k] != 'N') ||
+                (l_comp[k+patternlen]  == 'K' && chr[loci[i]+k] != 'G' && chr[loci[i]+k] != 'T' && chr[loci[i]+k] != 'K' && chr[loci[i]+k] != 'B' && chr[loci[i]+k] != 'D' && chr[loci[i]+k] != 'N') ||
+                (l_comp[k+patternlen]  == 'M' && chr[loci[i]+k] != 'A' && chr[loci[i]+k] != 'C' && chr[loci[i]+k] != 'M' && chr[loci[i]+k] != 'H' && chr[loci[i]+k] != 'V' && chr[loci[i]+k] != 'N') ||
+                (l_comp[k+patternlen]  == 'W' && chr[loci[i]+k] != 'A' && chr[loci[i]+k] != 'T' && chr[loci[i]+k] != 'W' && chr[loci[i]+k] != 'D' && chr[loci[i]+k] != 'H' && chr[loci[i]+k] != 'N') ||
+                (l_comp[k+patternlen]  == 'S' && chr[loci[i]+k] != 'C' && chr[loci[i]+k] != 'G' && chr[loci[i]+k] != 'S' && chr[loci[i]+k] != 'B' && chr[loci[i]+k] != 'V' && chr[loci[i]+k] != 'N') ||
+                (l_comp[k+patternlen]  == 'H' && chr[loci[i]+k] == 'G') ||
+                (l_comp[k+patternlen]  == 'B' && chr[loci[i]+k] == 'A') ||
+                (l_comp[k+patternlen]  == 'V' && chr[loci[i]+k] == 'T') ||
+                (l_comp[k+patternlen]  == 'D' && chr[loci[i]+k] == 'C') ||
+                (l_comp[k+patternlen]  == 'A' && chr[loci[i]+k] != 'A' && chr[loci[i]+k] != 'R' && chr[loci[i]+k] != 'W' && chr[loci[i]+k] != 'M' && chr[loci[i]+k] != 'D' && chr[loci[i]+k] != 'H' && chr[loci[i]+k] != 'V' && chr[loci[i]+k] != 'N') ||
+                (l_comp[k+patternlen]  == 'G' && chr[loci[i]+k] != 'G' && chr[loci[i]+k] != 'A' && chr[loci[i]+k] != 'S' && chr[loci[i]+k] != 'K' && chr[loci[i]+k] != 'B' && chr[loci[i]+k] != 'D' && chr[loci[i]+k] != 'V' && chr[loci[i]+k] != 'N') ||
+                (l_comp[k+patternlen]  == 'C' && chr[loci[i]+k] != 'C' && chr[loci[i]+k] != 'Y' && chr[loci[i]+k] != 'S' && chr[loci[i]+k] != 'M' && chr[loci[i]+k] != 'B' && chr[loci[i]+k] != 'H' && chr[loci[i]+k] != 'V' && chr[loci[i]+k] != 'N') ||
+                (l_comp[k+patternlen]  == 'T' && chr[loci[i]+k] != 'T' && chr[loci[i]+k] != 'Y' && chr[loci[i]+k] != 'W' && chr[loci[i]+k] != 'K' && chr[loci[i]+k] != 'B' && chr[loci[i]+k] != 'D' && chr[loci[i]+k] != 'H' && chr[loci[i]+k] != 'N')
+			    ) {
 				lmm_count++;
 				if (lmm_count > threshold) break;
             }
@@ -163,36 +171,40 @@ __kernel void finder_cpu(__global char* chr,
 		k = pat_index[j];
 		if (k == -1)
 			break;
-		if ( (pat[k] == 'R' && (chr[i+k] == 'C' || chr[i+k] == 'T')) ||
-		     (pat[k] == 'Y' && (chr[i+k] == 'A' || chr[i+k] == 'G')) ||
-		     (pat[k] == 'K' && (chr[i+k] == 'A' || chr[i+k] == 'C')) ||
-		     (pat[k] == 'M' && (chr[i+k] == 'G' || chr[i+k] == 'T')) ||
-		     (pat[k] == 'W' && (chr[i+k] == 'C' || chr[i+k] == 'G')) ||
-		     (pat[k] == 'S' && (chr[i+k] == 'A' || chr[i+k] == 'T')) ||
-		     (pat[k] == 'H' && (chr[i+k] == 'G')) ||
-		     (pat[k] == 'B' && (chr[i+k] == 'A')) ||
-		     (pat[k] == 'V' && (chr[i+k] == 'T')) ||
-		     (pat[k] == 'D' && (chr[i+k] == 'C')) ||
-		     (pat[k] == 'A' && (chr[i+k] != 'A')) ||
-		     (pat[k] == 'G' && (chr[i+k] != 'G')) ||
-		     (pat[k] == 'C' && (chr[i+k] != 'C')) ||
-		     (pat[k] == 'T' && (chr[i+k] != 'T')) )
+		if (
+                (pat[k] == 'R' && chr[i+k] != 'A' && chr[i+k] != 'G' && chr[i+k] != 'R' && chr[i+k] != 'D' && chr[i+k] != 'V' && chr[i+k] != 'N') ||
+                (pat[k] == 'Y' && chr[i+k] != 'C' && chr[i+k] != 'T' && chr[i+k] != 'Y' && chr[i+k] != 'B' && chr[i+k] != 'H' && chr[i+k] != 'N') ||
+                (pat[k] == 'K' && chr[i+k] != 'G' && chr[i+k] != 'T' && chr[i+k] != 'K' && chr[i+k] != 'B' && chr[i+k] != 'D' && chr[i+k] != 'N') ||
+                (pat[k] == 'M' && chr[i+k] != 'A' && chr[i+k] != 'C' && chr[i+k] != 'M' && chr[i+k] != 'H' && chr[i+k] != 'V' && chr[i+k] != 'N') ||
+                (pat[k] == 'W' && chr[i+k] != 'A' && chr[i+k] != 'T' && chr[i+k] != 'W' && chr[i+k] != 'D' && chr[i+k] != 'H' && chr[i+k] != 'N') ||
+                (pat[k] == 'S' && chr[i+k] != 'C' && chr[i+k] != 'G' && chr[i+k] != 'S' && chr[i+k] != 'B' && chr[i+k] != 'V' && chr[i+k] != 'N') ||
+                (pat[k] == 'H' && chr[i+k] == 'G') ||
+                (pat[k] == 'B' && chr[i+k] == 'A') ||
+                (pat[k] == 'V' && chr[i+k] == 'T') ||
+                (pat[k] == 'D' && chr[i+k] == 'C') ||
+                (pat[k] == 'A' && chr[i+k] != 'A' && chr[i+k] != 'R' && chr[i+k] != 'W' && chr[i+k] != 'M' && chr[i+k] != 'D' && chr[i+k] != 'H' && chr[i+k] != 'V' && chr[i+k] != 'N') ||
+                (pat[k] == 'G' && chr[i+k] != 'G' && chr[i+k] != 'A' && chr[i+k] != 'S' && chr[i+k] != 'K' && chr[i+k] != 'B' && chr[i+k] != 'D' && chr[i+k] != 'V' && chr[i+k] != 'N') ||
+                (pat[k] == 'C' && chr[i+k] != 'C' && chr[i+k] != 'Y' && chr[i+k] != 'S' && chr[i+k] != 'M' && chr[i+k] != 'B' && chr[i+k] != 'H' && chr[i+k] != 'V' && chr[i+k] != 'N') ||
+                (pat[k] == 'T' && chr[i+k] != 'T' && chr[i+k] != 'Y' && chr[i+k] != 'W' && chr[i+k] != 'K' && chr[i+k] != 'B' && chr[i+k] != 'D' && chr[i+k] != 'H' && chr[i+k] != 'N')
+            )
 			localflag |= 2;
 		k = pat_index[patternlen + j];
-		if ( (pat[k + patternlen] == 'R' && (chr[i+k] == 'C' || chr[i+k] == 'T')) ||
-		     (pat[k + patternlen] == 'Y' && (chr[i+k] == 'A' || chr[i+k] == 'G')) ||
-		     (pat[k + patternlen] == 'K' && (chr[i+k] == 'A' || chr[i+k] == 'C')) ||
-		     (pat[k + patternlen] == 'M' && (chr[i+k] == 'G' || chr[i+k] == 'T')) ||
-		     (pat[k + patternlen] == 'W' && (chr[i+k] == 'C' || chr[i+k] == 'G')) ||
-		     (pat[k + patternlen] == 'S' && (chr[i+k] == 'A' || chr[i+k] == 'T')) ||
-		     (pat[k + patternlen] == 'H' && (chr[i+k] == 'G')) ||
-		     (pat[k + patternlen] == 'B' && (chr[i+k] == 'A')) ||
-		     (pat[k + patternlen] == 'V' && (chr[i+k] == 'T')) ||
-		     (pat[k + patternlen] == 'D' && (chr[i+k] == 'C')) ||
-		     (pat[k + patternlen] == 'A' && (chr[i+k] != 'A')) ||
-		     (pat[k + patternlen] == 'G' && (chr[i+k] != 'G')) ||
-		     (pat[k + patternlen] == 'C' && (chr[i+k] != 'C')) ||
-		     (pat[k + patternlen] == 'T' && (chr[i+k] != 'T')) )
+		if (
+                (pat[k+patternlen] == 'R' && chr[i+k] != 'A' && chr[i+k] != 'G' && chr[i+k] != 'R' && chr[i+k] != 'D' && chr[i+k] != 'V' && chr[i+k] != 'N') ||
+                (pat[k+patternlen] == 'Y' && chr[i+k] != 'C' && chr[i+k] != 'T' && chr[i+k] != 'Y' && chr[i+k] != 'B' && chr[i+k] != 'H' && chr[i+k] != 'N') ||
+                (pat[k+patternlen] == 'K' && chr[i+k] != 'G' && chr[i+k] != 'T' && chr[i+k] != 'K' && chr[i+k] != 'B' && chr[i+k] != 'D' && chr[i+k] != 'N') ||
+                (pat[k+patternlen] == 'M' && chr[i+k] != 'A' && chr[i+k] != 'C' && chr[i+k] != 'M' && chr[i+k] != 'H' && chr[i+k] != 'V' && chr[i+k] != 'N') ||
+                (pat[k+patternlen] == 'W' && chr[i+k] != 'A' && chr[i+k] != 'T' && chr[i+k] != 'W' && chr[i+k] != 'D' && chr[i+k] != 'H' && chr[i+k] != 'N') ||
+                (pat[k+patternlen] == 'S' && chr[i+k] != 'C' && chr[i+k] != 'G' && chr[i+k] != 'S' && chr[i+k] != 'B' && chr[i+k] != 'V' && chr[i+k] != 'N') ||
+                (pat[k+patternlen] == 'H' && chr[i+k] == 'G') ||
+                (pat[k+patternlen] == 'B' && chr[i+k] == 'A') ||
+                (pat[k+patternlen] == 'V' && chr[i+k] == 'T') ||
+                (pat[k+patternlen] == 'D' && chr[i+k] == 'C') ||
+                (pat[k+patternlen] == 'A' && chr[i+k] != 'A' && chr[i+k] != 'R' && chr[i+k] != 'W' && chr[i+k] != 'M' && chr[i+k] != 'D' && chr[i+k] != 'H' && chr[i+k] != 'V' && chr[i+k] != 'N') ||
+                (pat[k+patternlen] == 'G' && chr[i+k] != 'G' && chr[i+k] != 'A' && chr[i+k] != 'S' && chr[i+k] != 'K' && chr[i+k] != 'B' && chr[i+k] != 'D' && chr[i+k] != 'V' && chr[i+k] != 'N') ||
+                (pat[k+patternlen] == 'C' && chr[i+k] != 'C' && chr[i+k] != 'Y' && chr[i+k] != 'S' && chr[i+k] != 'M' && chr[i+k] != 'B' && chr[i+k] != 'H' && chr[i+k] != 'V' && chr[i+k] != 'N') ||
+                (pat[k+patternlen] == 'T' && chr[i+k] != 'T' && chr[i+k] != 'Y' && chr[i+k] != 'W' && chr[i+k] != 'K' && chr[i+k] != 'B' && chr[i+k] != 'D' && chr[i+k] != 'H' && chr[i+k] != 'N')
+		    )
 			localflag |= 1;
 		if (localflag == 3)
 			break;
@@ -218,20 +230,22 @@ __kernel void comparer_cpu(__global char* chr, __global unsigned int* loci, __gl
 		for (j=0; j<patternlen; j++) {
 			k = comp_index[j];
 			if (k == -1) break;
-			if ( (comp[k] == 'R' && (chr[loci[i]+k] == 'C' || chr[loci[i]+k] == 'T')) ||
-			     (comp[k] == 'Y' && (chr[loci[i]+k] == 'A' || chr[loci[i]+k] == 'G')) ||
-			     (comp[k] == 'K' && (chr[loci[i]+k] == 'A' || chr[loci[i]+k] == 'C')) ||
-			     (comp[k] == 'M' && (chr[loci[i]+k] == 'G' || chr[loci[i]+k] == 'T')) ||
-			     (comp[k] == 'W' && (chr[loci[i]+k] == 'C' || chr[loci[i]+k] == 'G')) ||
-			     (comp[k] == 'S' && (chr[loci[i]+k] == 'A' || chr[loci[i]+k] == 'T')) ||
-			     (comp[k] == 'H' && (chr[loci[i]+k] == 'G')) ||
-			     (comp[k] == 'B' && (chr[loci[i]+k] == 'A')) ||
-			     (comp[k] == 'V' && (chr[loci[i]+k] == 'T')) ||
-			     (comp[k] == 'D' && (chr[loci[i]+k] == 'C')) ||
-				 (comp[k] == 'A' && (chr[loci[i]+k] != 'A')) ||
-			     (comp[k] == 'G' && (chr[loci[i]+k] != 'G')) ||
-			     (comp[k] == 'C' && (chr[loci[i]+k] != 'C')) ||
-			     (comp[k] == 'T' && (chr[loci[i]+k] != 'T'))) {
+			if (
+                    (comp[k]  == 'R' && chr[loci[i]+k] != 'A' && chr[loci[i]+k] != 'G' && chr[loci[i]+k] != 'R' && chr[loci[i]+k] != 'D' && chr[loci[i]+k] != 'V' && chr[loci[i]+k] != 'N') ||
+                    (comp[k]  == 'Y' && chr[loci[i]+k] != 'C' && chr[loci[i]+k] != 'T' && chr[loci[i]+k] != 'Y' && chr[loci[i]+k] != 'B' && chr[loci[i]+k] != 'H' && chr[loci[i]+k] != 'N') ||
+                    (comp[k]  == 'K' && chr[loci[i]+k] != 'G' && chr[loci[i]+k] != 'T' && chr[loci[i]+k] != 'K' && chr[loci[i]+k] != 'B' && chr[loci[i]+k] != 'D' && chr[loci[i]+k] != 'N') ||
+                    (comp[k]  == 'M' && chr[loci[i]+k] != 'A' && chr[loci[i]+k] != 'C' && chr[loci[i]+k] != 'M' && chr[loci[i]+k] != 'H' && chr[loci[i]+k] != 'V' && chr[loci[i]+k] != 'N') ||
+                    (comp[k]  == 'W' && chr[loci[i]+k] != 'A' && chr[loci[i]+k] != 'T' && chr[loci[i]+k] != 'W' && chr[loci[i]+k] != 'D' && chr[loci[i]+k] != 'H' && chr[loci[i]+k] != 'N') ||
+                    (comp[k]  == 'S' && chr[loci[i]+k] != 'C' && chr[loci[i]+k] != 'G' && chr[loci[i]+k] != 'S' && chr[loci[i]+k] != 'B' && chr[loci[i]+k] != 'V' && chr[loci[i]+k] != 'N') ||
+                    (comp[k]  == 'H' && chr[loci[i]+k] == 'G') ||
+                    (comp[k]  == 'B' && chr[loci[i]+k] == 'A') ||
+                    (comp[k]  == 'V' && chr[loci[i]+k] == 'T') ||
+                    (comp[k]  == 'D' && chr[loci[i]+k] == 'C') ||
+                    (comp[k]  == 'A' && chr[loci[i]+k] != 'A' && chr[loci[i]+k] != 'R' && chr[loci[i]+k] != 'W' && chr[loci[i]+k] != 'M' && chr[loci[i]+k] != 'D' && chr[loci[i]+k] != 'H' && chr[loci[i]+k] != 'V' && chr[loci[i]+k] != 'N') ||
+                    (comp[k]  == 'G' && chr[loci[i]+k] != 'G' && chr[loci[i]+k] != 'A' && chr[loci[i]+k] != 'S' && chr[loci[i]+k] != 'K' && chr[loci[i]+k] != 'B' && chr[loci[i]+k] != 'D' && chr[loci[i]+k] != 'V' && chr[loci[i]+k] != 'N') ||
+                    (comp[k]  == 'C' && chr[loci[i]+k] != 'C' && chr[loci[i]+k] != 'Y' && chr[loci[i]+k] != 'S' && chr[loci[i]+k] != 'M' && chr[loci[i]+k] != 'B' && chr[loci[i]+k] != 'H' && chr[loci[i]+k] != 'V' && chr[loci[i]+k] != 'N') ||
+                    (comp[k]  == 'T' && chr[loci[i]+k] != 'T' && chr[loci[i]+k] != 'Y' && chr[loci[i]+k] != 'W' && chr[loci[i]+k] != 'K' && chr[loci[i]+k] != 'B' && chr[loci[i]+k] != 'D' && chr[loci[i]+k] != 'H' && chr[loci[i]+k] != 'N')
+			     ) {
 				lmm_count++;
 				if (lmm_count > threshold) break;
 			}
@@ -248,20 +262,22 @@ __kernel void comparer_cpu(__global char* chr, __global unsigned int* loci, __gl
 		for (j=0; j<patternlen; j++) {
 			k = comp_index[patternlen + j];
 			if (k == -1) break;
-			if ( (comp[k+patternlen] == 'R' && (chr[loci[i]+k] == 'C' || chr[loci[i]+k] == 'T')) ||
-			     (comp[k+patternlen] == 'Y' && (chr[loci[i]+k] == 'A' || chr[loci[i]+k] == 'G')) ||
-			     (comp[k+patternlen] == 'K' && (chr[loci[i]+k] == 'A' || chr[loci[i]+k] == 'C')) ||
-			     (comp[k+patternlen] == 'M' && (chr[loci[i]+k] == 'G' || chr[loci[i]+k] == 'T')) ||
-			     (comp[k+patternlen] == 'W' && (chr[loci[i]+k] == 'C' || chr[loci[i]+k] == 'G')) ||
-			     (comp[k+patternlen] == 'S' && (chr[loci[i]+k] == 'A' || chr[loci[i]+k] == 'T')) ||
-			     (comp[k+patternlen] == 'H' && (chr[loci[i]+k] == 'G')) ||
-			     (comp[k+patternlen] == 'B' && (chr[loci[i]+k] == 'A')) ||
-			     (comp[k+patternlen] == 'V' && (chr[loci[i]+k] == 'T')) ||
-			     (comp[k+patternlen] == 'D' && (chr[loci[i]+k] == 'C')) ||
-			     (comp[k+patternlen] == 'A' && (chr[loci[i]+k] != 'A')) ||
-			     (comp[k+patternlen] == 'G' && (chr[loci[i]+k] != 'G')) ||
-			     (comp[k+patternlen] == 'C' && (chr[loci[i]+k] != 'C')) ||
-				 (comp[k+patternlen] == 'T' && (chr[loci[i]+k] != 'T'))) {
+			if (
+                    (comp[k+patternlen]  == 'R' && chr[loci[i]+k] != 'A' && chr[loci[i]+k] != 'G' && chr[loci[i]+k] != 'R' && chr[loci[i]+k] != 'D' && chr[loci[i]+k] != 'V' && chr[loci[i]+k] != 'N') ||
+                    (comp[k+patternlen]  == 'Y' && chr[loci[i]+k] != 'C' && chr[loci[i]+k] != 'T' && chr[loci[i]+k] != 'Y' && chr[loci[i]+k] != 'B' && chr[loci[i]+k] != 'H' && chr[loci[i]+k] != 'N') ||
+                    (comp[k+patternlen]  == 'K' && chr[loci[i]+k] != 'G' && chr[loci[i]+k] != 'T' && chr[loci[i]+k] != 'K' && chr[loci[i]+k] != 'B' && chr[loci[i]+k] != 'D' && chr[loci[i]+k] != 'N') ||
+                    (comp[k+patternlen]  == 'M' && chr[loci[i]+k] != 'A' && chr[loci[i]+k] != 'C' && chr[loci[i]+k] != 'M' && chr[loci[i]+k] != 'H' && chr[loci[i]+k] != 'V' && chr[loci[i]+k] != 'N') ||
+                    (comp[k+patternlen]  == 'W' && chr[loci[i]+k] != 'A' && chr[loci[i]+k] != 'T' && chr[loci[i]+k] != 'W' && chr[loci[i]+k] != 'D' && chr[loci[i]+k] != 'H' && chr[loci[i]+k] != 'N') ||
+                    (comp[k+patternlen]  == 'S' && chr[loci[i]+k] != 'C' && chr[loci[i]+k] != 'G' && chr[loci[i]+k] != 'S' && chr[loci[i]+k] != 'B' && chr[loci[i]+k] != 'V' && chr[loci[i]+k] != 'N') ||
+                    (comp[k+patternlen]  == 'H' && chr[loci[i]+k] == 'G') ||
+                    (comp[k+patternlen]  == 'B' && chr[loci[i]+k] == 'A') ||
+                    (comp[k+patternlen]  == 'V' && chr[loci[i]+k] == 'T') ||
+                    (comp[k+patternlen]  == 'D' && chr[loci[i]+k] == 'C') ||
+                    (comp[k+patternlen]  == 'A' && chr[loci[i]+k] != 'A' && chr[loci[i]+k] != 'R' && chr[loci[i]+k] != 'W' && chr[loci[i]+k] != 'M' && chr[loci[i]+k] != 'D' && chr[loci[i]+k] != 'H' && chr[loci[i]+k] != 'V' && chr[loci[i]+k] != 'N') ||
+                    (comp[k+patternlen]  == 'G' && chr[loci[i]+k] != 'G' && chr[loci[i]+k] != 'A' && chr[loci[i]+k] != 'S' && chr[loci[i]+k] != 'K' && chr[loci[i]+k] != 'B' && chr[loci[i]+k] != 'D' && chr[loci[i]+k] != 'V' && chr[loci[i]+k] != 'N') ||
+                    (comp[k+patternlen]  == 'C' && chr[loci[i]+k] != 'C' && chr[loci[i]+k] != 'Y' && chr[loci[i]+k] != 'S' && chr[loci[i]+k] != 'M' && chr[loci[i]+k] != 'B' && chr[loci[i]+k] != 'H' && chr[loci[i]+k] != 'V' && chr[loci[i]+k] != 'N') ||
+                    (comp[k+patternlen]  == 'T' && chr[loci[i]+k] != 'T' && chr[loci[i]+k] != 'Y' && chr[loci[i]+k] != 'W' && chr[loci[i]+k] != 'K' && chr[loci[i]+k] != 'B' && chr[loci[i]+k] != 'D' && chr[loci[i]+k] != 'H' && chr[loci[i]+k] != 'N')
+			    ) {
 				lmm_count++;
 				if (lmm_count > threshold) break;
             }
