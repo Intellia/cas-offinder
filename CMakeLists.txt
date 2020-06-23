@@ -1,8 +1,8 @@
 cmake_minimum_required (VERSION 2.6)
 project (CAS-OFFinder)
 
-set (CAS-OFFinder_VERSION_MAJOR 2)
-set (CAS-OFFinder_VERSION_MINOR 4)
+set (CAS-OFFinder_VERSION_MAJOR 3)
+set (CAS-OFFinder_VERSION_MINOR 0)
 
 set(CMAKE_BUILD_TYPE Release)
 

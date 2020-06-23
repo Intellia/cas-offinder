@@ -386,7 +386,7 @@ void Cas_OFFinder::init_platforms() {
 }
 void Cas_OFFinder::print_usage() {
 	unsigned int i, j;
-	cout << "Cas-OFFinder v2.4 (" << __DATE__ << ")" << endl <<
+	cout << "Intellia Modified Version of Cas-OFFinder v3.0 (" << __DATE__ << ")" << endl <<
 		endl <<
 		"Copyright (c) 2013 Jeongbin Park and Sangsu Bae" << endl <<
 		"Website: http://github.com/snugel/cas-offinder" << endl <<
