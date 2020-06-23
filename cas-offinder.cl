@@ -39,7 +39,7 @@ __kernel void finder(__global char* chr,
                 (l_pat[k] == 'V' && chr[i+k] == 'T') ||
                 (l_pat[k] == 'D' && chr[i+k] == 'C') ||
                 (l_pat[k] == 'A' && chr[i+k] != 'A' && chr[i+k] != 'R' && chr[i+k] != 'W' && chr[i+k] != 'M' && chr[i+k] != 'D' && chr[i+k] != 'H' && chr[i+k] != 'V') ||
-                (l_pat[k] == 'G' && chr[i+k] != 'G' && chr[i+k] != 'A' && chr[i+k] != 'S' && chr[i+k] != 'K' && chr[i+k] != 'B' && chr[i+k] != 'D' && chr[i+k] != 'V') ||
+                (l_pat[k] == 'G' && chr[i+k] != 'G' && chr[i+k] != 'R' && chr[i+k] != 'S' && chr[i+k] != 'K' && chr[i+k] != 'B' && chr[i+k] != 'D' && chr[i+k] != 'V') ||
                 (l_pat[k] == 'C' && chr[i+k] != 'C' && chr[i+k] != 'Y' && chr[i+k] != 'S' && chr[i+k] != 'M' && chr[i+k] != 'B' && chr[i+k] != 'H' && chr[i+k] != 'V') ||
                 (l_pat[k] == 'T' && chr[i+k] != 'T' && chr[i+k] != 'Y' && chr[i+k] != 'W' && chr[i+k] != 'K' && chr[i+k] != 'B' && chr[i+k] != 'D' && chr[i+k] != 'H')
             )
@@ -57,7 +57,7 @@ __kernel void finder(__global char* chr,
                 (l_pat[k+patternlen] == 'V' && chr[i+k] == 'T') ||
                 (l_pat[k+patternlen] == 'D' && chr[i+k] == 'C') ||
                 (l_pat[k+patternlen] == 'A' && chr[i+k] != 'A' && chr[i+k] != 'R' && chr[i+k] != 'W' && chr[i+k] != 'M' && chr[i+k] != 'D' && chr[i+k] != 'H' && chr[i+k] != 'V') ||
-                (l_pat[k+patternlen] == 'G' && chr[i+k] != 'G' && chr[i+k] != 'A' && chr[i+k] != 'S' && chr[i+k] != 'K' && chr[i+k] != 'B' && chr[i+k] != 'D' && chr[i+k] != 'V') ||
+                (l_pat[k+patternlen] == 'G' && chr[i+k] != 'G' && chr[i+k] != 'R' && chr[i+k] != 'S' && chr[i+k] != 'K' && chr[i+k] != 'B' && chr[i+k] != 'D' && chr[i+k] != 'V') ||
                 (l_pat[k+patternlen] == 'C' && chr[i+k] != 'C' && chr[i+k] != 'Y' && chr[i+k] != 'S' && chr[i+k] != 'M' && chr[i+k] != 'B' && chr[i+k] != 'H' && chr[i+k] != 'V') ||
                 (l_pat[k+patternlen] == 'T' && chr[i+k] != 'T' && chr[i+k] != 'Y' && chr[i+k] != 'W' && chr[i+k] != 'K' && chr[i+k] != 'B' && chr[i+k] != 'D' && chr[i+k] != 'H')
 		    )
@@ -108,7 +108,7 @@ __kernel void comparer(__global char* chr, __global unsigned int* loci, __global
                 (l_comp[k]  == 'V' && chr[loci[i]+k] == 'T') ||
                 (l_comp[k]  == 'D' && chr[loci[i]+k] == 'C') ||
                 (l_comp[k]  == 'A' && chr[loci[i]+k] != 'A' && chr[loci[i]+k] != 'R' && chr[loci[i]+k] != 'W' && chr[loci[i]+k] != 'M' && chr[loci[i]+k] != 'D' && chr[loci[i]+k] != 'H' && chr[loci[i]+k] != 'V') ||
-                (l_comp[k]  == 'G' && chr[loci[i]+k] != 'G' && chr[loci[i]+k] != 'A' && chr[loci[i]+k] != 'S' && chr[loci[i]+k] != 'K' && chr[loci[i]+k] != 'B' && chr[loci[i]+k] != 'D' && chr[loci[i]+k] != 'V') ||
+                (l_comp[k]  == 'G' && chr[loci[i]+k] != 'G' && chr[loci[i]+k] != 'R' && chr[loci[i]+k] != 'S' && chr[loci[i]+k] != 'K' && chr[loci[i]+k] != 'B' && chr[loci[i]+k] != 'D' && chr[loci[i]+k] != 'V') ||
                 (l_comp[k]  == 'C' && chr[loci[i]+k] != 'C' && chr[loci[i]+k] != 'Y' && chr[loci[i]+k] != 'S' && chr[loci[i]+k] != 'M' && chr[loci[i]+k] != 'B' && chr[loci[i]+k] != 'H' && chr[loci[i]+k] != 'V') ||
                 (l_comp[k]  == 'T' && chr[loci[i]+k] != 'T' && chr[loci[i]+k] != 'Y' && chr[loci[i]+k] != 'W' && chr[loci[i]+k] != 'K' && chr[loci[i]+k] != 'B' && chr[loci[i]+k] != 'D' && chr[loci[i]+k] != 'H')
                 ) {
@@ -140,7 +140,7 @@ __kernel void comparer(__global char* chr, __global unsigned int* loci, __global
                 (l_comp[k+patternlen]  == 'V' && chr[loci[i]+k] == 'T') ||
                 (l_comp[k+patternlen]  == 'D' && chr[loci[i]+k] == 'C') ||
                 (l_comp[k+patternlen]  == 'A' && chr[loci[i]+k] != 'A' && chr[loci[i]+k] != 'R' && chr[loci[i]+k] != 'W' && chr[loci[i]+k] != 'M' && chr[loci[i]+k] != 'D' && chr[loci[i]+k] != 'H' && chr[loci[i]+k] != 'V') ||
-                (l_comp[k+patternlen]  == 'G' && chr[loci[i]+k] != 'G' && chr[loci[i]+k] != 'A' && chr[loci[i]+k] != 'S' && chr[loci[i]+k] != 'K' && chr[loci[i]+k] != 'B' && chr[loci[i]+k] != 'D' && chr[loci[i]+k] != 'V') ||
+                (l_comp[k+patternlen]  == 'G' && chr[loci[i]+k] != 'G' && chr[loci[i]+k] != 'R' && chr[loci[i]+k] != 'S' && chr[loci[i]+k] != 'K' && chr[loci[i]+k] != 'B' && chr[loci[i]+k] != 'D' && chr[loci[i]+k] != 'V') ||
                 (l_comp[k+patternlen]  == 'C' && chr[loci[i]+k] != 'C' && chr[loci[i]+k] != 'Y' && chr[loci[i]+k] != 'S' && chr[loci[i]+k] != 'M' && chr[loci[i]+k] != 'B' && chr[loci[i]+k] != 'H' && chr[loci[i]+k] != 'V') ||
                 (l_comp[k+patternlen]  == 'T' && chr[loci[i]+k] != 'T' && chr[loci[i]+k] != 'Y' && chr[loci[i]+k] != 'W' && chr[loci[i]+k] != 'K' && chr[loci[i]+k] != 'B' && chr[loci[i]+k] != 'D' && chr[loci[i]+k] != 'H')
 			    ) {
@@ -183,7 +183,7 @@ __kernel void finder_cpu(__global char* chr,
                 (pat[k] == 'V' && chr[i+k] == 'T') ||
                 (pat[k] == 'D' && chr[i+k] == 'C') ||
                 (pat[k] == 'A' && chr[i+k] != 'A' && chr[i+k] != 'R' && chr[i+k] != 'W' && chr[i+k] != 'M' && chr[i+k] != 'D' && chr[i+k] != 'H' && chr[i+k] != 'V') ||
-                (pat[k] == 'G' && chr[i+k] != 'G' && chr[i+k] != 'A' && chr[i+k] != 'S' && chr[i+k] != 'K' && chr[i+k] != 'B' && chr[i+k] != 'D' && chr[i+k] != 'V') ||
+                (pat[k] == 'G' && chr[i+k] != 'G' && chr[i+k] != 'R' && chr[i+k] != 'S' && chr[i+k] != 'K' && chr[i+k] != 'B' && chr[i+k] != 'D' && chr[i+k] != 'V') ||
                 (pat[k] == 'C' && chr[i+k] != 'C' && chr[i+k] != 'Y' && chr[i+k] != 'S' && chr[i+k] != 'M' && chr[i+k] != 'B' && chr[i+k] != 'H' && chr[i+k] != 'V') ||
                 (pat[k] == 'T' && chr[i+k] != 'T' && chr[i+k] != 'Y' && chr[i+k] != 'W' && chr[i+k] != 'K' && chr[i+k] != 'B' && chr[i+k] != 'D' && chr[i+k] != 'H')
             )
@@ -201,7 +201,7 @@ __kernel void finder_cpu(__global char* chr,
                 (pat[k+patternlen] == 'V' && chr[i+k] == 'T') ||
                 (pat[k+patternlen] == 'D' && chr[i+k] == 'C') ||
                 (pat[k+patternlen] == 'A' && chr[i+k] != 'A' && chr[i+k] != 'R' && chr[i+k] != 'W' && chr[i+k] != 'M' && chr[i+k] != 'D' && chr[i+k] != 'H' && chr[i+k] != 'V') ||
-                (pat[k+patternlen] == 'G' && chr[i+k] != 'G' && chr[i+k] != 'A' && chr[i+k] != 'S' && chr[i+k] != 'K' && chr[i+k] != 'B' && chr[i+k] != 'D' && chr[i+k] != 'V') ||
+                (pat[k+patternlen] == 'G' && chr[i+k] != 'G' && chr[i+k] != 'R' && chr[i+k] != 'S' && chr[i+k] != 'K' && chr[i+k] != 'B' && chr[i+k] != 'D' && chr[i+k] != 'V') ||
                 (pat[k+patternlen] == 'C' && chr[i+k] != 'C' && chr[i+k] != 'Y' && chr[i+k] != 'S' && chr[i+k] != 'M' && chr[i+k] != 'B' && chr[i+k] != 'H' && chr[i+k] != 'V') ||
                 (pat[k+patternlen] == 'T' && chr[i+k] != 'T' && chr[i+k] != 'Y' && chr[i+k] != 'W' && chr[i+k] != 'K' && chr[i+k] != 'B' && chr[i+k] != 'D' && chr[i+k] != 'H')
 		    )
@@ -242,7 +242,7 @@ __kernel void comparer_cpu(__global char* chr, __global unsigned int* loci, __gl
                     (comp[k]  == 'V' && chr[loci[i]+k] == 'T') ||
                     (comp[k]  == 'D' && chr[loci[i]+k] == 'C') ||
                     (comp[k]  == 'A' && chr[loci[i]+k] != 'A' && chr[loci[i]+k] != 'R' && chr[loci[i]+k] != 'W' && chr[loci[i]+k] != 'M' && chr[loci[i]+k] != 'D' && chr[loci[i]+k] != 'H' && chr[loci[i]+k] != 'V') ||
-                    (comp[k]  == 'G' && chr[loci[i]+k] != 'G' && chr[loci[i]+k] != 'A' && chr[loci[i]+k] != 'S' && chr[loci[i]+k] != 'K' && chr[loci[i]+k] != 'B' && chr[loci[i]+k] != 'D' && chr[loci[i]+k] != 'V') ||
+                    (comp[k]  == 'G' && chr[loci[i]+k] != 'G' && chr[loci[i]+k] != 'R' && chr[loci[i]+k] != 'S' && chr[loci[i]+k] != 'K' && chr[loci[i]+k] != 'B' && chr[loci[i]+k] != 'D' && chr[loci[i]+k] != 'V') ||
                     (comp[k]  == 'C' && chr[loci[i]+k] != 'C' && chr[loci[i]+k] != 'Y' && chr[loci[i]+k] != 'S' && chr[loci[i]+k] != 'M' && chr[loci[i]+k] != 'B' && chr[loci[i]+k] != 'H' && chr[loci[i]+k] != 'V') ||
                     (comp[k]  == 'T' && chr[loci[i]+k] != 'T' && chr[loci[i]+k] != 'Y' && chr[loci[i]+k] != 'W' && chr[loci[i]+k] != 'K' && chr[loci[i]+k] != 'B' && chr[loci[i]+k] != 'D' && chr[loci[i]+k] != 'H')
 			     ) {
@@ -274,7 +274,7 @@ __kernel void comparer_cpu(__global char* chr, __global unsigned int* loci, __gl
                     (comp[k+patternlen]  == 'V' && chr[loci[i]+k] == 'T') ||
                     (comp[k+patternlen]  == 'D' && chr[loci[i]+k] == 'C') ||
                     (comp[k+patternlen]  == 'A' && chr[loci[i]+k] != 'A' && chr[loci[i]+k] != 'R' && chr[loci[i]+k] != 'W' && chr[loci[i]+k] != 'M' && chr[loci[i]+k] != 'D' && chr[loci[i]+k] != 'H' && chr[loci[i]+k] != 'V') ||
-                    (comp[k+patternlen]  == 'G' && chr[loci[i]+k] != 'G' && chr[loci[i]+k] != 'A' && chr[loci[i]+k] != 'S' && chr[loci[i]+k] != 'K' && chr[loci[i]+k] != 'B' && chr[loci[i]+k] != 'D' && chr[loci[i]+k] != 'V') ||
+                    (comp[k+patternlen]  == 'G' && chr[loci[i]+k] != 'G' && chr[loci[i]+k] != 'R' && chr[loci[i]+k] != 'S' && chr[loci[i]+k] != 'K' && chr[loci[i]+k] != 'B' && chr[loci[i]+k] != 'D' && chr[loci[i]+k] != 'V') ||
                     (comp[k+patternlen]  == 'C' && chr[loci[i]+k] != 'C' && chr[loci[i]+k] != 'Y' && chr[loci[i]+k] != 'S' && chr[loci[i]+k] != 'M' && chr[loci[i]+k] != 'B' && chr[loci[i]+k] != 'H' && chr[loci[i]+k] != 'V') ||
                     (comp[k+patternlen]  == 'T' && chr[loci[i]+k] != 'T' && chr[loci[i]+k] != 'Y' && chr[loci[i]+k] != 'W' && chr[loci[i]+k] != 'K' && chr[loci[i]+k] != 'B' && chr[loci[i]+k] != 'D' && chr[loci[i]+k] != 'H')
 			    ) {
